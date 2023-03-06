@@ -3,6 +3,7 @@ import EmptyList from "../components/Common/EmptyList";
 import BlogList from "../components/Home/BlogList";
 import Header from "../components/Home/Header";
 import SearchBar from "../components/Home/SearchBar";
+import { Link } from "react-router-dom";
 
 const Home = ({ blogs }) => {
   // const [searchKey, setSearchKey] = useState("");
@@ -28,6 +29,7 @@ const Home = ({ blogs }) => {
   return (
     <div>
       <Header></Header>
+      <Link to={"/edit-blog/new"}>Add a new Blog</Link>
       <SearchBar
       // value={searchKey}
       // clearSearch={handleClearSearch}

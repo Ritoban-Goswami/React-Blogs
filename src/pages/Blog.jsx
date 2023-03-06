@@ -11,7 +11,7 @@ const Blog = ({ blogs }) => {
 
   useEffect(() => {
     if (blogs && blogs.length > 0) {
-      let blog = blogs.find((blogIndex) => blogIndex.id === parseInt(id));
+      let blog = blogs.find((blogIndex) => blogIndex.id == id);
       if (blog) {
         setBlog(blog);
       }
@@ -40,6 +40,7 @@ const Blog = ({ blogs }) => {
           </header>
           <img src={blog.cover} alt="cover" />
           <p className="blog-desc">{blog.description}</p>
+          <Link to={`/edit-blog/${id}`}>Edit Blog</Link>
         </div>
       ) : (
         <EmptyList />
