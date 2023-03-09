@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import BlogForm from "../components/Common/BlogForm";
 import EmptyList from "../components/Common/EmptyList";
-import { ref, set, child, push, update } from "firebase/database";
+import { ref, set, update } from "firebase/database";
 import { db } from "../firebase-config";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const EditBlog = ({ blogs }) => {
   const [blogsLength, setBlogsLength] = useState();
@@ -12,6 +14,7 @@ const EditBlog = ({ blogs }) => {
   const [formInputEdit, setFormInputEdit] = useState({});
 
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const handleChangeNew = (e) => {
     const input = e.target.name;
@@ -27,11 +30,14 @@ const EditBlog = ({ blogs }) => {
   const handlSubmitNew = (e) => {
     e.preventDefault();
     writeBlogData();
+    navigate("/");
+    console.log("clicked");
   };
   const handlSubmitEdit = (e) => {
     e.preventDefault();
     console.log(formInputEdit);
     updateBlogData();
+    navigate("/");
   };
 
   function writeBlogData() {
@@ -83,31 +89,30 @@ const EditBlog = ({ blogs }) => {
     }
   }, [blogsId, id]);
 
-  if (id === "new") {
-    return (
-      <div>
+  return (
+    <div>
+      <Link className="blog-goBack" to={"/"}>
+        Go Back
+      </Link>
+      {id === "new" ? (
         <BlogForm
           heading={"Add Your New Blog"}
           handleChange={handleChangeNew}
           handlSubmit={handlSubmitNew}
           formInput={formInputNew}
         />
-      </div>
-    );
-  } else if (blogsId.includes(id)) {
-    return (
-      <div>
+      ) : blogsId.includes(id) ? (
         <BlogForm
           heading={"Edit Your Blog"}
           handleChange={handleChangeEdit}
           handlSubmit={handlSubmitEdit}
           formInput={formInputEdit}
         />
-      </div>
-    );
-  } else {
-    return <EmptyList />;
-  }
+      ) : (
+        <EmptyList />
+      )}
+    </div>
+  );
 };
 
 export default EditBlog;

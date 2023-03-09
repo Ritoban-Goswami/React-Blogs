@@ -20,9 +20,13 @@ const Blog = ({ blogs }) => {
     }
   }, [blogs, id]);
 
+  const handleDelete = () => {
+    deleteBlog();
+    console.log("clicked");
+  };
+
   const deleteBlog = () => {
     remove(ref(db, "/" + (id - 1)));
-    console.log("clicked");
   };
 
   return (
@@ -48,7 +52,9 @@ const Blog = ({ blogs }) => {
           <img src={blog.cover} alt="cover" />
           <p className="blog-desc">{blog.description}</p>
           <Link to={`/edit-blog/${id}`}>Edit Blog</Link>
-          <Link onClick={deleteBlog}>Delete Blog</Link>
+          <Link onClick={handleDelete} to={"/"}>
+            Delete Blog
+          </Link>
         </div>
       ) : (
         <EmptyList />
