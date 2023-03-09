@@ -1,0 +1,122 @@
+[
+  {
+    "authorAvatar": "/assets/images/author.jpg",
+    "authorName": "John Doe",
+    "category": "development",
+    "cover": "/assets/images/designer-1.jpg",
+    "createdAt": "June 03, 2021",
+    "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+    "id": 1,
+    "subCategory": [
+      "frontend",
+      "ui/ux",
+      "design"
+    ],
+    "title": "7 CSS tools you should be using "
+  },
+  {
+    "authorAvatar": "/assets/images/author.jpg",
+    "authorName": "John Doe",
+    "category": "travel",
+    "cover": "/assets/images/f67396fc3cfce63a28e07ebb35d974ac.jpg",
+    "createdAt": "June 03, 2021",
+    "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+    "id": 2,
+    "subCategory": [
+      "vacation",
+      "holidays",
+      "sight seeing"
+    ],
+    "title": "Milan Places That Highlight The City"
+  },
+  {
+    "authorAvatar": "/assets/images/author.jpg",
+    "authorName": "John Doe",
+    "category": "shopping",
+    "cover": "/assets/images/fQwuyKJ9qxjSbr6REcgtmW-1200-80.jpg",
+    "createdAt": "June 03, 2021",
+    "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+    "id": 3,
+    "subCategory": [
+      "e-commerce store",
+      "clothing",
+      "shopping store"
+    ],
+    "title": "Online Shopping – An Alternative to Shopping in the Mall"
+  },
+  {
+    "authorAvatar": "/assets/images/author.jpg",
+    "authorName": "John Doe",
+    "category": "adventure",
+    "cover": "https://picsum.photos/400/300",
+    "createdAt": "June 03, 2021",
+    "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+    "id": "4",
+    "subCategory": [
+      "frontend",
+      "ui/ux",
+      "design"
+    ],
+    "title": "New ADVENTURE IN YOU"
+  },
+  {
+    "authorAvatar": "/assets/images/author.jpg",
+    "authorName": "John Doe",
+    "category": "cooking",
+    "cover": "/assets/images/make-it-personal.jpg",
+    "createdAt": "June 03, 2021",
+    "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+    "id": 5,
+    "subCategory": [
+      "bbq",
+      "food",
+      "lifestyle"
+    ],
+    "title": "Loaded BBQ Baked Potatoes"
+  },
+  {
+    "authorAvatar": "/assets/images/author.jpg",
+    "authorName": "John Doe",
+    "category": "travel",
+    "cover": "/assets/images/Purple-Combination-colors-graphic-design-predictions-1024x576-1024x576.jpg",
+    "createdAt": "June 03, 2021",
+    "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+    "id": 6,
+    "subCategory": [
+      "beaches",
+      "sea",
+      "holidays"
+    ],
+    "title": "Beyond the Beach"
+  },
+  {
+    "authorAvatar": "/assets/images/author.jpg",
+    "authorName": "John Doe",
+    "category": "art",
+    "cover": "/assets/images/Synthwave-Postmodern.jpg",
+    "createdAt": "June 03, 2021",
+    "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+    "id": 7,
+    "subCategory": [
+      "skill",
+      "design",
+      "passion"
+    ],
+    "title": "Art & Perception"
+  },
+  {
+    "authorAvatar": "/assets/images/author.jpg",
+    "authorName": "John Doe",
+    "category": "new",
+    "cover": "https://picsum.photos/400/300",
+    "createdAt": "June 03, 2021",
+    "description": "The feature still working?",
+    "id": "8",
+    "subCategory": [
+      "frontend",
+      "ui/ux",
+      "design"
+    ],
+    "title": "New Blog!"
+  }
+]

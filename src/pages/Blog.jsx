@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import EmptyList from "../components/Common/EmptyList";
 import Chip from "../components/Common/Chip";
 import "./BlogStyles.css";
+import { ref, remove } from "firebase/database";
+import { db } from "../firebase-config";
 
 const Blog = ({ blogs }) => {
   const { id } = useParams();
@@ -17,6 +19,11 @@ const Blog = ({ blogs }) => {
       }
     }
   }, [blogs, id]);
+
+  const deleteBlog = () => {
+    remove(ref(db, "/" + (id - 1)));
+    console.log("clicked");
+  };
 
   return (
     <div>
@@ -41,6 +48,7 @@ const Blog = ({ blogs }) => {
           <img src={blog.cover} alt="cover" />
           <p className="blog-desc">{blog.description}</p>
           <Link to={`/edit-blog/${id}`}>Edit Blog</Link>
+          <Link onClick={deleteBlog}>Delete Blog</Link>
         </div>
       ) : (
         <EmptyList />
