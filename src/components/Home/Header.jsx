@@ -4,14 +4,10 @@ import "./HeaderStyles.css";
 const Header = () => {
   return (
     <header className="home-header">
-      <h2>Inc. This Morning</h2>
-      <h1>
-        <span>"</span>Blog<span>"</span>
-      </h1>
-      <p>
-        Lorem ipsum dolor sit amet,
-        <br /> consectetur adipisicing elit. Optio, sit fugit!
-      </p>
+      <img
+        src="https://github.com/Ritoban-Goswami/React-Blogs/blob/main/public/logo.png"
+        alt="BlogScape"
+      />
     </header>
   );
 };
