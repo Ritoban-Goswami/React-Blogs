@@ -1,10 +1,9 @@
 import React from "react";
 import BlogItem from "./BlogItem";
-import "./BlogListStyles.css";
 
 const BlogList = ({ blogs }) => {
   return (
-    <div className="blogList-wrap">
+    <div className="grid grid-cols-3 gap-12">
       {blogs.map((blog) => (
         <BlogItem blog={blog} key={blog.id} />
       ))}

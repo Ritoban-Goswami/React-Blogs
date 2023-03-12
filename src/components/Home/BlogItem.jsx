@@ -1,6 +1,5 @@
 import React from "react";
 import Chip from "../Common/Chip";
-import "./BlogItemStyles.css";
 import { Link } from "react-router-dom";
 
 const BlogItem = ({
@@ -16,20 +15,30 @@ const BlogItem = ({
   },
 }) => {
   return (
-    <div className="blogItem-wrap">
-      <img className="blogItem-cover" src={cover} alt="cover" />
+    <div className="flex flex-col">
+      <img
+        className="w-full h-72 object-cover rounded-2xl mb-2"
+        src={cover}
+        alt="cover"
+      />
       <Chip label={category}></Chip>
-      <h3>{title}</h3>
-      <p className="blogItem-desc">{description}</p>
-      <footer>
-        <div className="blogItem-author">
-          <img src={authorAvatar} alt="avatar" />
+      <h3 className="mb-4 mt-2 font-bold text-[1.4rem]">{title}</h3>
+      <p className="overflow-hidden max-h-[10%] text-clip text-sm pr-3 text-slate-500">
+        {description}
+      </p>
+      <footer className="flex items-center mt-4 justify-between">
+        <div className="flex items-center">
+          <img
+            className="mr-2 w-12 h-12 object-cover rounded-full"
+            src={authorAvatar}
+            alt="avatar"
+          />
           <div>
-            <h6>{authorName}</h6>
-            <p>{createdAt}</p>
+            <h6 className="font-bold text-lg">{authorName}</h6>
+            <p className="text-xs font-semibold text-slate-400">{createdAt}</p>
           </div>
         </div>
-        <Link className="blogItem-link" to={`/blog/${id}`}>
+        <Link className=" hover:text-green-600" to={`/blog/${id}`}>
           &#8594;
         </Link>
       </footer>

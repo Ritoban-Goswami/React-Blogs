@@ -3,9 +3,10 @@ import Blog from "./pages/Blog";
 import Home from "./pages/Home";
 import EditBlog from "./pages/EditBlog";
 import { Route, Routes } from "react-router-dom";
-import "./App.css";
 import { db } from "./firebase-config";
 import { onValue, ref } from "firebase/database";
+import Header from "../src/components/Common/Header";
+import EmptyList from "./components/Common/EmptyList";
 
 function App() {
   const [blogs, setBlogs] = useState({});
@@ -22,11 +23,13 @@ function App() {
     readBlogData();
   }, []);
   return (
-    <div className="container">
+    <div className="container mx-auto p-4">
+      <Header></Header>
       <Routes>
         <Route path="/" element={<Home blogs={blogs} />} />
         <Route path="blog/:id" element={<Blog blogs={blogs} />} />
         <Route path="edit-blog/:id" element={<EditBlog blogs={blogs} />} />
+        <Route path="*" element={<EmptyList />} />
       </Routes>
     </div>
   );
