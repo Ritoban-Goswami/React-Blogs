@@ -45,7 +45,7 @@ const EditBlog = ({ blogs }) => {
       authorAvatar: "/assets/images/author.jpg",
       authorName: "John Doe",
       category: formInputNew.blogCategory,
-      cover: "https://picsum.photos/400/300",
+      cover: "https://picsum.photos/1200/900",
       createdAt: "June 03, 2021",
       description: formInputNew.blogDesc,
       id: blogsLength + 1,
@@ -91,9 +91,6 @@ const EditBlog = ({ blogs }) => {
 
   return (
     <div>
-      <Link className="blog-goBack" to={"/"}>
-        Go Back
-      </Link>
       {id === "new" ? (
         <BlogForm
           heading={"Add Your New Blog"}

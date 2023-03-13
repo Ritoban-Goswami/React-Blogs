@@ -7,7 +7,7 @@ const Header = () => {
       <Link to={"/"} className="flex items-center">
         <img
           className="w-1/6"
-          src="blogscape-low-resolution-logo-color-on-transparent-background.png"
+          src="/blogscape-low-resolution-logo-color-on-transparent-background.png"
           alt="BlogScape"
         />
       </Link>
