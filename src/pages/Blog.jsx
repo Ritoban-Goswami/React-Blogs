@@ -6,7 +6,7 @@ import Chip from "../components/Common/Chip";
 import { ref, remove } from "firebase/database";
 import { db } from "../firebase-config";
 
-const Blog = ({ blogs }) => {
+const Blog = ({ blogs, user }) => {
   const { id } = useParams();
   const [blog, setBlog] = useState({});
 
@@ -53,21 +53,23 @@ const Blog = ({ blogs }) => {
             alt="cover"
           />
           <p className="p-4 mt-6">{blog.description}</p>
-          <div className="w-1/3 mx-auto flex justify-evenly items-center my-4">
-            <Link
-              className="bg-transparent font-semibold hover:text-green-600 py-2 px-4 border-green-600 border-2 rounded"
-              to={`/edit-blog/${id}`}
-            >
-              Edit Blog
-            </Link>
-            <Link
-              className="bg-transparent font-semibold hover:text-red-600 py-2 px-4 border-red-500 border-2 rounded"
-              onClick={handleDelete}
-              to={"/"}
-            >
-              Delete Blog
-            </Link>
-          </div>
+          {user && user.uid === blog.authorId && (
+            <div className="w-1/3 mx-auto flex justify-evenly items-center my-4">
+              <Link
+                className="bg-transparent font-semibold hover:text-green-600 py-2 px-4 border-green-600 border-2 rounded"
+                to={`/edit-blog/${id}`}
+              >
+                Edit Blog
+              </Link>
+              <Link
+                className="bg-transparent font-semibold hover:text-red-600 py-2 px-4 border-red-500 border-2 rounded"
+                onClick={handleDelete}
+                to={"/"}
+              >
+                Delete Blog
+              </Link>
+            </div>
+          )}
         </div>
       ) : (
         <EmptyList />

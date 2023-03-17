@@ -4,10 +4,9 @@ import BlogForm from "../components/Common/BlogForm";
 import EmptyList from "../components/Common/EmptyList";
 import { ref, set, update } from "firebase/database";
 import { db } from "../firebase-config";
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
-const EditBlog = ({ blogs }) => {
+const EditBlog = ({ blogs, user }) => {
   const [blogsLength, setBlogsLength] = useState();
   const [blogsId, setBlogsId] = useState([]);
   const [formInputNew, setFormInputNew] = useState({});
@@ -43,7 +42,8 @@ const EditBlog = ({ blogs }) => {
   function writeBlogData() {
     set(ref(db, "/" + blogsLength), {
       authorAvatar: "/assets/images/author.jpg",
-      authorName: "John Doe",
+      authorName: user.displayName,
+      authorId: user.uid,
       category: formInputNew.blogCategory,
       cover: "https://picsum.photos/1200/900",
       createdAt: "June 03, 2021",
@@ -57,7 +57,8 @@ const EditBlog = ({ blogs }) => {
   function updateBlogData() {
     const blogData = {
       authorAvatar: "/assets/images/author.jpg",
-      authorName: "John Doe",
+      authorName: user.displayName,
+      authorId: user.uid,
       category: formInputEdit.blogCategory,
       cover: "https://picsum.photos/400/300",
       createdAt: "June 03, 2021",
