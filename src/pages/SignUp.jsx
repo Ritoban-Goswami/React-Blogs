@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { ref, uploadBytes } from "firebase/storage";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { auth, storage } from "../firebase-config";
 import { useNavigate } from "react-router-dom";
 
@@ -12,20 +12,38 @@ const SignIn = () => {
   const [password, setPassword] = useState("");
   const [confPassword, setConfPassword] = useState("");
   const [signInImage, setSignInImage] = useState({});
+  const [signInImageURL, setSignInImageURL] = useState('');
 
-  const handleUpload = () => {
+  const handleUpload = (user) => {
     if (!signInImage) {
       alert("Please choose a file first!");
     } else {
-      const storageRef = ref(storage, `/1/${signInImage.name}`);
+      const storageRef = ref(storage, `/${user.uid}/${signInImage.name}`);
 
       uploadBytes(storageRef, signInImage).then((snapshot) => {
-        alert("Uploaded a blob or file!");
-        console.log(snapshot);
-      });
+        console.log("Uploaded a blob or file!",snapshot);
+        getSignInImageURL(storageRef,user);
+      }).catch((err)=>{console.log(err)});
     }
   };
-  handleUpload();
+
+  const getSignInImageURL =(storageRef,user)=>{
+    getDownloadURL(storageRef)
+    .then((url) => {
+      setSignInImageURL(url);
+      updateProfile(user, {
+        displayName: signInName,
+        photoURL: url
+      })
+        .then(() => {
+          console.log(user);
+          navigate("/");
+        })
+        .catch((error) => {
+          alert(error.message);
+        });
+    }).catch((err)=>{console.log(err)})
+  }
 
   const handlSubmit = async (e) => {
     e.preventDefault();
@@ -33,22 +51,11 @@ const SignIn = () => {
       await createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
           const user = userCredential.user;
-          updateProfile(user, {
-            displayName: signInName,
-          })
-            .then(() => {
-              console.log(user);
-              navigate("/");
-            })
-            .catch((error) => {
-              alert(error.message);
-            });
+          handleUpload(user);
         })
         .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
           alert(error.message);
-          console.log(errorCode, errorMessage);
+          console.log(error.code, error.message);
         });
     } else {
       alert("Passwords do not match");
@@ -56,8 +63,8 @@ const SignIn = () => {
   };
 
   useEffect(() => {
-    console.log(signInImage);
-  }, [signInImage]);
+    console.log(signInImageURL);
+  }, [signInImageURL]);
 
   return (
     <div>
@@ -66,7 +73,7 @@ const SignIn = () => {
           Sign Up To BlogsScape Now!
         </h1>
         <form
-          // onSubmit={handlSubmit}
+          onSubmit={handlSubmit}
           className="border rounded px-8 pt-6 pb-8"
         >
           <div className="mb-8">

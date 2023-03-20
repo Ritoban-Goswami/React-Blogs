@@ -37,6 +37,22 @@ const BlogForm = ({ heading, handleChange, formInput, handlSubmit }) => {
             id="blogDesc"
           />
         </div>
+        <div className="mb-8">
+          <label
+            htmlFor="blogImage"
+            className="block text-gray-700 text-lg font-semibold mb-3"
+          >
+            Cover Photo
+          </label>
+          <input
+          type="file"
+          className="appearance-none w-full py-2"
+          onChange={handleChange}
+          name='blogImage'
+          id="blogImage"
+          required
+          />
+        </div>
         <div className="mb-10">
           <label
             htmlFor="blogCategory"

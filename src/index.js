@@ -9,7 +9,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <App className='box-border bg-slate-300' />
+      <App/>
     </BrowserRouter>
   </React.StrictMode>
 );

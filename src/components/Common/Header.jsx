@@ -48,7 +48,7 @@ const Header = ({ user }) => {
               onClick={toggleProfileModal}
             >
               <img
-                src="/assets/images/author.jpg"
+                src={user.photoURL? user.photoURL : "/assets/images/author.jpg"}
                 alt="User Avatar"
                 className="w-12 h-12 object-cover rounded-full"
               />
