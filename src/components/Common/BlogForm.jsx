@@ -45,12 +45,11 @@ const BlogForm = ({ heading, handleChange, formInput, handlSubmit }) => {
             Cover Photo
           </label>
           <input
-          type="file"
-          className="appearance-none w-full py-2"
-          onChange={handleChange}
-          name='blogImage'
-          id="blogImage"
-          required
+            type="file"
+            className="appearance-none w-full py-2"
+            onChange={handleChange}
+            name="blogImage"
+            id="blogImage"
           />
         </div>
         <div className="mb-10">

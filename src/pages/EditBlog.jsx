@@ -16,7 +16,6 @@ const EditBlog = ({ blogs, user }) => {
   const [blogsId, setBlogsId] = useState([]);
   const [formInputNew, setFormInputNew] = useState({});
   const [formInputEdit, setFormInputEdit] = useState({});
-  const [blogImageURL, setblogImageURL] = useState("");
 
   const { id } = useParams();
   const navigate = useNavigate();
@@ -32,84 +31,64 @@ const EditBlog = ({ blogs, user }) => {
     setFormInputEdit((values) => ({ ...values, [input]: value })); //TODO: learn about this syntax
   };
 
-  const uploadBlogImage = (formInput) => {
-    if (!formInput.blogImage) {
-      return;
-    } else {
-      const storageRef = ref_storage(
-        storage,
-        `/${user.uid}/${formInput.blogImage.name}`
-      );
-
-      uploadBytes(storageRef, formInput.blogImage)
-        .then((snapshot) => {
-          console.log("Uploaded a blob or file!", snapshot);
-          getBLogImageURL(storageRef);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-  };
-
-  const getBLogImageURL = (storageRef) => {
-    getDownloadURL(storageRef)
-      .then((url) => {
-        setblogImageURL(url);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
   const handlSubmitNew = async (e) => {
     e.preventDefault();
-    try {
-      await uploadBlogImage(formInputNew);
-      writeBlogData();
-    } catch (error) {
-      console.log(error.code, error.message);
-    }
-    navigate("/");
-  };
-  const handlSubmitEdit = async (e) => {
-    e.preventDefault();
-    try {
-      await uploadBlogImage(formInputEdit);
-      updateBlogData();
-    } catch (error) {
-      console.log(error.code, error.message);
-    }
-    navigate("/");
-  };
+    const cover = formInputNew.blogImage
+      ? await uploadBlogImage(formInputNew.blogImage)
+      : "https://picsum.photos/1200/900";
 
-  function writeBlogData() {
-    set(ref_database(db, "/" + blogsLength), {
+    const newBlog = {
       authorAvatar: user.photoURL ? user.photoURL : "/assets/images/author.jpg",
       authorName: user.displayName,
       authorId: user.uid,
       category: formInputNew.blogCategory,
-      cover: blogImageURL ? blogImageURL : "https://picsum.photos/1200/900",
+      cover: cover,
       createdAt: "June 03, 2021",
       description: formInputNew.blogDesc,
       id: blogsLength + 1,
       subCategory: ["frontend", "ui/ux", "design"],
       title: formInputNew.blogTitle,
-    });
+    };
+
+    try {
+      await set(ref_database(db, "/" + blogsLength), newBlog);
+      navigate("/");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  async function uploadBlogImage(image) {
+    const storageRef = ref_storage(storage, `/${user.uid}/${image.name}`);
+    const snapshot = await uploadBytes(storageRef, image);
+    console.log("Uploaded a blob or file!", snapshot);
+    const url = await getDownloadURL(storageRef);
+    return url ? url : "https://picsum.photos/1200/900";
   }
 
-  function updateBlogData() {
-    const blogData = {
+  const handlSubmitEdit = async (e) => {
+    e.preventDefault();
+    const cover = formInputEdit.blogImage
+      ? await uploadBlogImage(formInputEdit.blogImage)
+      : "https://picsum.photos/1200/900";
+
+    const editedBlog = {
       category: formInputEdit.blogCategory,
-      cover: blogImageURL ? blogImageURL : "https://picsum.photos/1200/900",
+      cover: cover,
       createdAt: "June 03, 2021",
       description: formInputEdit.blogDesc,
       id: id,
       subCategory: ["frontend", "ui/ux", "design"],
       title: formInputEdit.blogTitle,
     };
-    return update(ref_database(db, "/" + (id - 1)), blogData);
-  }
+
+    try {
+      await update(ref_database(db, "/" + (id - 1)), editedBlog);
+      navigate("/");
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   useEffect(() => {
     if (blogs && blogs.length > 0) {
@@ -128,10 +107,6 @@ const EditBlog = ({ blogs, user }) => {
       });
     }
   }, [blogsId, id]);
-
-  useEffect(() => {
-    console.log(blogImageURL);
-  }, [blogImageURL]);
 
   return (
     <div>
