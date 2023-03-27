@@ -10,15 +10,16 @@ import {
 } from "firebase/storage";
 import { db, storage } from "../firebase-config";
 import { useNavigate } from "react-router-dom";
+import { v4 as uuid } from "uuid";
 
 const EditBlog = ({ blogs, user }) => {
-  const [blogsLength, setBlogsLength] = useState();
   const [blogsId, setBlogsId] = useState([]);
   const [formInputNew, setFormInputNew] = useState({});
   const [formInputEdit, setFormInputEdit] = useState({});
 
   const { id } = useParams();
   const navigate = useNavigate();
+  const currentDate = new Date();
 
   const handleChangeNew = (e) => {
     const input = e.target.name;
@@ -32,10 +33,11 @@ const EditBlog = ({ blogs, user }) => {
   };
 
   const handlSubmitNew = async (e) => {
+    const blogId = uuid();
     e.preventDefault();
     const cover = formInputNew.blogImage
       ? await uploadBlogImage(formInputNew.blogImage)
-      : "https://picsum.photos/1200/900";
+      : "https://picsum.photos/600/450";
 
     const newBlog = {
       authorAvatar: user.photoURL ? user.photoURL : "/assets/images/author.jpg",
@@ -43,16 +45,19 @@ const EditBlog = ({ blogs, user }) => {
       authorId: user.uid,
       category: formInputNew.blogCategory,
       cover: cover,
-      createdAt: "June 03, 2021",
+      createdAt: currentDate.toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      }),
       description: formInputNew.blogDesc,
-      id: blogsLength + 1,
-      subCategory: ["frontend", "ui/ux", "design"],
+      id: blogId,
       title: formInputNew.blogTitle,
     };
 
     try {
-      await set(ref_database(db, "/" + blogsLength), newBlog);
-      navigate("/");
+      await set(ref_database(db, "/" + blogId), newBlog);
+      navigate(`/blog/${id}`);
     } catch (err) {
       console.log(err);
     }
@@ -63,37 +68,40 @@ const EditBlog = ({ blogs, user }) => {
     const snapshot = await uploadBytes(storageRef, image);
     console.log("Uploaded a blob or file!", snapshot);
     const url = await getDownloadURL(storageRef);
-    return url ? url : "https://picsum.photos/1200/900";
+    return url ? url : "https://picsum.photos/600/450";
   }
 
   const handlSubmitEdit = async (e) => {
     e.preventDefault();
     const cover = formInputEdit.blogImage
       ? await uploadBlogImage(formInputEdit.blogImage)
-      : "https://picsum.photos/1200/900";
+      : "https://picsum.photos/600/450";
 
     const editedBlog = {
       category: formInputEdit.blogCategory,
       cover: cover,
-      createdAt: "June 03, 2021",
+      createdAt: currentDate.toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      }),
       description: formInputEdit.blogDesc,
       id: id,
-      subCategory: ["frontend", "ui/ux", "design"],
+      subCategory: null,
       title: formInputEdit.blogTitle,
     };
 
     try {
-      await update(ref_database(db, "/" + (id - 1)), editedBlog);
-      navigate("/");
+      await update(ref_database(db, "/" + id), editedBlog);
+      navigate(`/blog/${id}`);
     } catch (err) {
       console.log(err);
     }
   };
 
   useEffect(() => {
-    if (blogs && blogs.length > 0) {
-      setBlogsLength(blogs.length);
-      const blogsId = blogs.map((blog) => blog.id.toString());
+    if (blogs && Object.keys(blogs).length > 0) {
+      const blogsId = Object.values(blogs).map((blog) => blog.id.toString());
       setBlogsId(blogsId);
     }
   }, [blogs]);
@@ -101,9 +109,9 @@ const EditBlog = ({ blogs, user }) => {
   useEffect(() => {
     if (blogsId.includes(id)) {
       setFormInputEdit({
-        blogTitle: blogs[id - 1].title,
-        blogDesc: blogs[id - 1].description,
-        blogCategory: blogs[id - 1].category,
+        blogTitle: blogs[id].title,
+        blogDesc: blogs[id].description,
+        blogCategory: blogs[id].category,
       });
     }
   }, [blogsId, id]);

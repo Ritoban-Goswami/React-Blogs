@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import EmptyList from "../components/Common/EmptyList";
-import Chip from "../components/Common/Chip";
 import { ref, remove } from "firebase/database";
 import { db } from "../firebase-config";
 
@@ -11,21 +10,22 @@ const Blog = ({ blogs, user }) => {
   const [blog, setBlog] = useState({});
 
   useEffect(() => {
-    if (blogs && blogs.length > 0) {
-      let blog = blogs.find((blogIndex) => blogIndex.id == id);
+    if (id && blogs && Object.keys(blogs).length > 0) {
+      let blog = Object.values(blogs).find((blogIndex) => blogIndex?.id == id);
       if (blog) {
         setBlog(blog);
+      } else {
+        console.log("Couldn't find blog!");
       }
     }
-  }, [blogs, id]);
+  }, [blogs]);
 
   const handleDelete = () => {
     deleteBlog();
-    console.log("clicked");
   };
 
   const deleteBlog = () => {
-    remove(ref(db, "/" + (id - 1)));
+    remove(ref(db, "/" + id));
   };
 
   return (
@@ -36,16 +36,9 @@ const Blog = ({ blogs, user }) => {
             <p className="text-sm font-semibold text-slate-400">
               Published {blog.createdAt}
             </p>
-            <h1 className="font-bold text-3xl capitalize">{blog.title}</h1>
-            {blog.subCategory && (
-              <div className="flex justify-evenly w-1/4 mx-auto my-4">
-                {blog.subCategory.map((category, index) => (
-                  <div key={index}>
-                    <Chip label={category} />
-                  </div>
-                ))}
-              </div>
-            )}
+            <h1 className="font-bold text-3xl capitalize mt-8 mb-16">
+              {blog.title}
+            </h1>
           </header>
           <img
             className="w-4/6 mx-auto rounded-2xl"

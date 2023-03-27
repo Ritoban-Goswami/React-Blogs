@@ -16,7 +16,7 @@ function App() {
   const [blogs, setBlogs] = useState({});
   const [user, setUser] = useState(null);
 
-  function readBlogData(blogId) {
+  function readBlogData() {
     const blogRef = ref(db, "/");
     onValue(blogRef, (snapshot) => {
       const data = snapshot.val();
@@ -31,13 +31,9 @@ function App() {
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        // User is signed in, see docs for a list of available properties
-        // https://firebase.google.com/docs/reference/js/firebase.User
-        const uid = user.uid;
         setUser(user);
         console.log(user);
       } else {
-        // User is signed out
         setUser(null);
         console.log("user is logged out");
       }

@@ -4,7 +4,13 @@ import BlogList from "../components/Home/BlogList";
 
 const Home = ({ blogs }) => {
   return (
-    <>{!blogs.length ? <EmptyList /> : <BlogList blogs={blogs}></BlogList>}</>
+    <>
+      {!Object.keys(blogs) ? (
+        <EmptyList />
+      ) : (
+        <BlogList blogs={blogs}></BlogList>
+      )}
+    </>
   );
 };
 
