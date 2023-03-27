@@ -21,7 +21,12 @@ const Blog = ({ blogs, user }) => {
   }, [blogs]);
 
   const handleDelete = () => {
-    deleteBlog();
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this blog?"
+    );
+    if (confirmDelete) {
+      deleteBlog();
+    }
   };
 
   const deleteBlog = () => {

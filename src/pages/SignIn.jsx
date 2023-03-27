@@ -3,16 +3,18 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase-config";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import Loader from "../components/Common/Loader";
 
 const SignIn = () => {
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [logginInUser, setCreatingUser] = useState(false);
 
   const handlSubmit = async (e) => {
     e.preventDefault();
-
+    setCreatingUser(true);
     await signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in
@@ -76,7 +78,7 @@ const SignIn = () => {
           </div>
           <div className="flex items-center justify-center">
             <button className="w-1/4 bg-transparent font-semibold hover:text-green-600 py-2 px-4 border-green-600 border-2 rounded">
-              Go
+              {logginInUser ? <Loader /> : <>Go</>}
             </button>
           </div>
         </form>

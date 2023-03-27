@@ -1,6 +1,13 @@
 import React from "react";
+import Loader from "./Loader";
 
-const BlogForm = ({ heading, handleChange, formInput, handlSubmit }) => {
+const BlogForm = ({
+  heading,
+  handleChange,
+  formInput,
+  handlSubmit,
+  submitting,
+}) => {
   return (
     <div className="w-full max-w-2xl mx-auto">
       <h1 className="text-center font-bold text-3xl my-4">{heading}</h1>
@@ -69,8 +76,8 @@ const BlogForm = ({ heading, handleChange, formInput, handlSubmit }) => {
           />
         </div>
         <div className="flex items-center justify-center">
-          <button className="w-1/4 bg-transparent font-semibold hover:text-green-600 py-2 px-4 border-green-600 border-2 rounded">
-            Go
+          <button className="w-1/5 h-12 bg-transparent font-semibold hover:text-green-600 py-1 px-2 border-green-600 border-2 rounded">
+            {submitting ? <Loader /> : <>Go</>}
           </button>
         </div>
       </form>

@@ -4,7 +4,7 @@ import Home from "./pages/Home";
 import EditBlog from "./pages/EditBlog";
 import { Route, Routes } from "react-router-dom";
 import { db } from "./firebase-config";
-import { onValue, ref } from "firebase/database";
+import { onValue, ref, query, orderByChild } from "firebase/database";
 import Header from "../src/components/Common/Header";
 import EmptyList from "./components/Common/EmptyList";
 import SignIn from "./pages/SignIn";
@@ -17,7 +17,7 @@ function App() {
   const [user, setUser] = useState(null);
 
   function readBlogData() {
-    const blogRef = ref(db, "/");
+    const blogRef = query(ref(db, "/"), orderByChild("createdAt"));
     onValue(blogRef, (snapshot) => {
       const data = snapshot.val();
       setBlogs(data);

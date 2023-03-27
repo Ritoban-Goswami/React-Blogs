@@ -16,6 +16,7 @@ const EditBlog = ({ blogs, user }) => {
   const [blogsId, setBlogsId] = useState([]);
   const [formInputNew, setFormInputNew] = useState({});
   const [formInputEdit, setFormInputEdit] = useState({});
+  const [submitting, setSubmitting] = useState(false);
 
   const { id } = useParams();
   const navigate = useNavigate();
@@ -35,6 +36,7 @@ const EditBlog = ({ blogs, user }) => {
   const handlSubmitNew = async (e) => {
     const blogId = uuid();
     e.preventDefault();
+    setSubmitting(true);
     const cover = formInputNew.blogImage
       ? await uploadBlogImage(formInputNew.blogImage)
       : "https://picsum.photos/600/450";
@@ -45,11 +47,7 @@ const EditBlog = ({ blogs, user }) => {
       authorId: user.uid,
       category: formInputNew.blogCategory,
       cover: cover,
-      createdAt: currentDate.toLocaleDateString("en-US", {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-      }),
+      createdAt: currentDate,
       description: formInputNew.blogDesc,
       id: blogId,
       title: formInputNew.blogTitle,
@@ -57,7 +55,7 @@ const EditBlog = ({ blogs, user }) => {
 
     try {
       await set(ref_database(db, "/" + blogId), newBlog);
-      navigate(`/blog/${id}`);
+      navigate(`/blog/${blogId}`);
     } catch (err) {
       console.log(err);
     }
@@ -73,6 +71,7 @@ const EditBlog = ({ blogs, user }) => {
 
   const handlSubmitEdit = async (e) => {
     e.preventDefault();
+    setSubmitting(true);
     const cover = formInputEdit.blogImage
       ? await uploadBlogImage(formInputEdit.blogImage)
       : "https://picsum.photos/600/450";
@@ -80,11 +79,7 @@ const EditBlog = ({ blogs, user }) => {
     const editedBlog = {
       category: formInputEdit.blogCategory,
       cover: cover,
-      createdAt: currentDate.toLocaleDateString("en-US", {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-      }),
+      createdAt: currentDate,
       description: formInputEdit.blogDesc,
       id: id,
       subCategory: null,
@@ -124,6 +119,7 @@ const EditBlog = ({ blogs, user }) => {
           handleChange={handleChangeNew}
           handlSubmit={handlSubmitNew}
           formInput={formInputNew}
+          submitting={submitting}
         />
       ) : blogsId.includes(id) ? (
         <BlogForm
@@ -131,6 +127,7 @@ const EditBlog = ({ blogs, user }) => {
           handleChange={handleChangeEdit}
           handlSubmit={handlSubmitEdit}
           formInput={formInputEdit}
+          submitting={submitting}
         />
       ) : (
         <EmptyList />

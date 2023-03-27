@@ -3,6 +3,7 @@ import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { auth, storage } from "../firebase-config";
 import { useNavigate } from "react-router-dom";
+import Loader from "../components/Common/Loader";
 
 const SignIn = () => {
   const navigate = useNavigate();
@@ -12,7 +13,8 @@ const SignIn = () => {
   const [password, setPassword] = useState("");
   const [confPassword, setConfPassword] = useState("");
   const [signInImage, setSignInImage] = useState({});
-  const [signInImageURL, setSignInImageURL] = useState('');
+  const [signInImageURL, setSignInImageURL] = useState("");
+  const [creatingUser, setCreatingUser] = useState(false);
 
   const handleUpload = (user) => {
     if (!signInImage) {
@@ -20,30 +22,37 @@ const SignIn = () => {
     } else {
       const storageRef = ref(storage, `/${user.uid}/${signInImage.name}`);
 
-      uploadBytes(storageRef, signInImage).then((snapshot) => {
-        console.log("Uploaded a blob or file!",snapshot);
-        getSignInImageURL(storageRef,user);
-      }).catch((err)=>{console.log(err)});
+      uploadBytes(storageRef, signInImage)
+        .then((snapshot) => {
+          console.log("Uploaded a blob or file!", snapshot);
+          getSignInImageURL(storageRef, user);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
   };
 
-  const getSignInImageURL =(storageRef,user)=>{
+  const getSignInImageURL = (storageRef, user) => {
     getDownloadURL(storageRef)
-    .then((url) => {
-      setSignInImageURL(url);
-      updateProfile(user, {
-        displayName: signInName,
-        photoURL: url
-      })
-        .then(() => {
-          console.log(user);
-          navigate("/");
+      .then((url) => {
+        setSignInImageURL(url);
+        updateProfile(user, {
+          displayName: signInName,
+          photoURL: url,
         })
-        .catch((error) => {
-          alert(error.message);
-        });
-    }).catch((err)=>{console.log(err)})
-  }
+          .then(() => {
+            console.log(user);
+            navigate("/");
+          })
+          .catch((error) => {
+            alert(error.message);
+          });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   const handlSubmit = async (e) => {
     e.preventDefault();
@@ -72,10 +81,7 @@ const SignIn = () => {
         <h1 className="text-center font-bold text-3xl my-4">
           Sign Up To BlogsScape Now!
         </h1>
-        <form
-          onSubmit={handlSubmit}
-          className="border rounded px-8 pt-6 pb-8"
-        >
+        <form onSubmit={handlSubmit} className="border rounded px-8 pt-6 pb-8">
           <div className="mb-8">
             <label
               htmlFor="signInName"
@@ -152,7 +158,7 @@ const SignIn = () => {
           </div>
           <div className="flex items-center justify-center">
             <button className="w-1/4 bg-transparent font-semibold hover:text-green-600 py-2 px-4 border-green-600 border-2 rounded">
-              Go
+              {creatingUser ? <Loader /> : <>Go</>}
             </button>
           </div>
         </form>

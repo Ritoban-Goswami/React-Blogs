@@ -23,9 +23,7 @@ const BlogItem = ({
       />
       <Chip label={category}></Chip>
       <h3 className="mb-4 mt-2 font-bold text-[1.4rem]">{title}</h3>
-      <p className="overflow-hidden max-h-[10%] text-clip text-sm pr-3 text-slate-500">
-        {description}
-      </p>
+      <p className="truncate text-sm pr-3 text-slate-500">{description}</p>
       <footer className="flex items-center mt-4 justify-between">
         <div className="flex items-center">
           <img
@@ -35,7 +33,16 @@ const BlogItem = ({
           />
           <div>
             <h6 className="font-bold text-lg">{authorName}</h6>
-            <p className="text-xs font-semibold text-slate-400">{createdAt}</p>
+            <p className="text-xs font-semibold text-slate-400">
+              {
+                createdAt
+                // .toLocaleDateString("en-US", {
+                //   year: "numeric",
+                //   month: "long",
+                //   day: "numeric",
+                // })
+              }
+            </p>
           </div>
         </div>
         <Link className=" hover:text-green-600" to={`/blog/${id}`}>
