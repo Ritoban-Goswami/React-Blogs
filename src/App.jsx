@@ -41,19 +41,21 @@ function App() {
   }, []);
 
   return (
-    <div className="container mx-auto p-4">
-      <Header user={user}></Header>
-      <Routes>
-        <Route path="/" element={<Home blogs={blogs} />} />
-        <Route path="/sign-in" element={<SignIn />} />
-        <Route path="/sign-up" element={<SignUp />} />
-        <Route path="blog/:id" element={<Blog blogs={blogs} user={user} />} />
-        <Route
-          path="edit-blog/:id"
-          element={<EditBlog blogs={blogs} user={user} />}
-        />
-        <Route path="*" element={<EmptyList />} />
-      </Routes>
+    <div className="bg-neutral-950 min-h-screen">
+      <div className="container mx-auto p-4">
+        <Header user={user}></Header>
+        <Routes>
+          <Route path="/" element={<Home blogs={blogs} />} />
+          <Route path="/sign-in" element={<SignIn />} />
+          <Route path="/sign-up" element={<SignUp />} />
+          <Route path="blog/:id" element={<Blog blogs={blogs} user={user} />} />
+          <Route
+            path="edit-blog/:id"
+            element={<EditBlog blogs={blogs} user={user} />}
+          />
+          <Route path="*" element={<EmptyList />} />
+        </Routes>
+      </div>
     </div>
   );
 }

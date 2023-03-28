@@ -39,7 +39,10 @@ const Header = ({ user }) => {
         {user ? (
           <>
             <li className="ml-3">
-              <Link className="hover:text-green-600" to={"/edit-blog/new"}>
+              <Link
+                className="text-neutral-100 hover:text-green-600"
+                to={"/edit-blog/new"}
+              >
                 Add Blog
               </Link>
             </li>
@@ -48,24 +51,26 @@ const Header = ({ user }) => {
               onClick={toggleProfileModal}
             >
               <img
-                src={user.photoURL? user.photoURL : "/assets/images/author.jpg"}
+                src={
+                  user.photoURL ? user.photoURL : "/assets/images/author.jpg"
+                }
                 alt="User Avatar"
                 className="w-12 h-12 object-cover rounded-full"
               />
               {isModalOpen && (
                 <div
-                  className="absolute right-0 bottom-[-75px] w-40 py-2 px-3 shadow bg-white rounded flex flex-col"
+                  className="absolute right-0 bottom-[-75px] w-40 py-2 px-3 shadow bg-neutral-900 rounded flex flex-col"
                   id="profieModal"
                 >
                   <Link
-                    className="flex items-center hover:text-red-400 text-sm"
+                    className="flex items-center text-neutral-200 hover:text-red-400 text-sm"
                     onClick={handleLogout}
                   >
                     <FaPowerOff />
                     <span className="ml-1">Log Out</span>
                   </Link>
                   <Link
-                    className="flex items-center hover:text-green-600 text-sm mt-2"
+                    className="flex items-center text-neutral-200 hover:text-green-600 text-sm mt-2"
                     to={"/sign-up"}
                   >
                     <FaUserPlus />
@@ -77,7 +82,10 @@ const Header = ({ user }) => {
           </>
         ) : (
           <li className="ml-3">
-            <Link className="hover:text-green-600" to={"/sign-in"}>
+            <Link
+              className="text-neutral-100 hover:text-green-600"
+              to={"/sign-in"}
+            >
               Sign In
             </Link>
           </li>

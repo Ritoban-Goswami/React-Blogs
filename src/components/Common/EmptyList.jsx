@@ -4,8 +4,8 @@ const EmptyList = () => {
   return (
     <div className="flex justify-center items-center">
       <img
-        className="w-full max-w-sm"
-        src="/assets/images/13525-empty.gif"
+        className="w-full max-w-lg"
+        src="/assets/images/output-onlinegiftools.gif"
         alt="empty"
       />
     </div>

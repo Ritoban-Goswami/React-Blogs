@@ -81,14 +81,14 @@ const SignIn = () => {
   return (
     <div>
       <div className="w-full max-w-2xl mx-auto">
-        <h1 className="text-center font-bold text-3xl my-4">
+        <h1 className="text-center text-neutral-100 font-bold text-3xl my-4">
           Sign Up To BlogsScape Now!
         </h1>
         <form onSubmit={handlSubmit} className="border rounded px-8 pt-6 pb-8">
           <div className="mb-8">
             <label
               htmlFor="signInName"
-              className="block text-gray-700 text-lg font-semibold mb-3"
+              className="block text-neutral-200 text-lg font-semibold mb-3"
             >
               Name
             </label>
@@ -104,7 +104,7 @@ const SignIn = () => {
           <div className="mb-8">
             <label
               htmlFor="blogTitle"
-              className="block text-gray-700 text-lg font-semibold mb-3"
+              className="block text-neutral-200 text-lg font-semibold mb-3"
             >
               Email Address
             </label>
@@ -119,7 +119,7 @@ const SignIn = () => {
           <div className="mb-8">
             <label
               htmlFor="blogDesc"
-              className="block text-gray-700 text-lg font-semibold mb-3"
+              className="block text-neutral-200 text-lg font-semibold mb-3"
             >
               Password
             </label>
@@ -133,7 +133,7 @@ const SignIn = () => {
           <div className="mb-8">
             <label
               htmlFor="blogCategory"
-              className="block text-gray-700 text-lg font-semibold mb-3"
+              className="block text-neutral-200 text-lg font-semibold mb-3"
             >
               Confirm Password
             </label>
@@ -147,7 +147,7 @@ const SignIn = () => {
           <div className="mb-10">
             <label
               htmlFor="signInImage"
-              className="block text-gray-700 text-lg font-semibold mb-3"
+              className="block text-neutral-200 text-lg font-semibold mb-3"
             >
               Profile Picture
             </label>
@@ -160,7 +160,7 @@ const SignIn = () => {
             />
           </div>
           <div className="flex items-center justify-center">
-            <button className="w-1/4 bg-transparent font-semibold hover:text-green-600 py-2 px-4 border-green-600 border-2 rounded">
+            <button className="w-1/4 bg-transparent font-semibold text-neutral-200 hover:text-green-600 py-2 px-4 border-green-600 border-2 rounded">
               {creatingUser ? <Loader /> : <>Go</>}
             </button>
           </div>

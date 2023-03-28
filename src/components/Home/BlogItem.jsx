@@ -23,8 +23,10 @@ const BlogItem = ({
         alt="cover"
       />
       <Chip label={category}></Chip>
-      <h3 className="mb-4 mt-2 font-bold text-[1.4rem]">{title}</h3>
-      <p className="truncate text-sm pr-3 text-slate-500">{description}</p>
+      <h3 className="text-neutral-100 mb-4 mt-2 font-bold text-[1.4rem]">
+        {title}
+      </h3>
+      <p className="truncate text-sm pr-3 text-neutral-400">{description}</p>
       <footer className="flex items-center mt-4 justify-between">
         <div className="flex items-center">
           <img
@@ -33,8 +35,8 @@ const BlogItem = ({
             alt="avatar"
           />
           <div>
-            <h6 className="font-bold text-lg">{authorName}</h6>
-            <p className="text-xs font-semibold text-slate-400">
+            <h6 className="font-bold text-lg text-neutral-100">{authorName}</h6>
+            <p className="text-xs font-semibold text-neutral-400">
               {createdAt.toLocaleDateString("en-US", {
                 year: "numeric",
                 month: "long",
@@ -43,7 +45,10 @@ const BlogItem = ({
             </p>
           </div>
         </div>
-        <Link className=" hover:text-green-600" to={`/blog/${id}`}>
+        <Link
+          className="text-neutral-100 hover:text-green-600"
+          to={`/blog/${id}`}
+        >
           &#8594;
         </Link>
       </footer>
