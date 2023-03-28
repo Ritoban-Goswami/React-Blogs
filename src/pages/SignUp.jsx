@@ -56,6 +56,7 @@ const SignIn = () => {
 
   const handlSubmit = async (e) => {
     e.preventDefault();
+    setCreatingUser(true);
     if (password === confPassword) {
       await createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
@@ -64,9 +65,11 @@ const SignIn = () => {
         })
         .catch((error) => {
           alert(error.message);
+          setCreatingUser(false);
           console.log(error.code, error.message);
         });
     } else {
+      setCreatingUser(false);
       alert("Passwords do not match");
     }
   };

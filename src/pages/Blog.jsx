@@ -14,6 +14,13 @@ const Blog = ({ blogs, user }) => {
       let blog = Object.values(blogs).find((blogIndex) => blogIndex?.id == id);
       if (blog) {
         setBlog(blog);
+        let createdAtStr = new Date(blog.createdAt);
+        createdAtStr = createdAtStr.toLocaleDateString("en-US", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        });
+        blog["createdAt"] = createdAtStr;
       } else {
         console.log("Couldn't find blog!");
       }

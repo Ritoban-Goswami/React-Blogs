@@ -14,6 +14,7 @@ const BlogItem = ({
     cover,
   },
 }) => {
+  createdAt = new Date(createdAt);
   return (
     <div className="flex flex-col">
       <img
@@ -34,14 +35,11 @@ const BlogItem = ({
           <div>
             <h6 className="font-bold text-lg">{authorName}</h6>
             <p className="text-xs font-semibold text-slate-400">
-              {
-                createdAt
-                // .toLocaleDateString("en-US", {
-                //   year: "numeric",
-                //   month: "long",
-                //   day: "numeric",
-                // })
-              }
+              {createdAt.toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })}
             </p>
           </div>
         </div>

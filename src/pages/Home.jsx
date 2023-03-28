@@ -3,12 +3,21 @@ import EmptyList from "../components/Common/EmptyList";
 import BlogList from "../components/Home/BlogList";
 
 const Home = ({ blogs }) => {
+  const sortedBlogsValue = Object.values(blogs).sort(
+    (a, b) => new Date(a.createdAt) - new Date(b.createdAt)
+  );
+  const sortedDataObj = sortedBlogsValue.reduce(
+    (obj, item) => ({ ...obj, [item.id]: item }),
+    {}
+  );
+
+  const dataObj = { ...sortedDataObj };
   return (
     <>
-      {!Object.keys(blogs) ? (
+      {!Object.keys(dataObj) ? (
         <EmptyList />
       ) : (
-        <BlogList blogs={blogs}></BlogList>
+        <BlogList blogs={dataObj}></BlogList>
       )}
     </>
   );

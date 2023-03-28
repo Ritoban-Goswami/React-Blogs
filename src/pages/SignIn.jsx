@@ -22,11 +22,11 @@ const SignIn = () => {
         navigate("/");
       })
       .catch((error) => {
+        setCreatingUser(false);
         const errorCode = error.code;
         const errorMessage = error.message;
         console.log(errorCode, errorMessage);
         alert(errorMessage);
-        setCreatingUser(false);
       });
   };
 

@@ -17,7 +17,7 @@ function App() {
   const [user, setUser] = useState(null);
 
   function readBlogData() {
-    const blogRef = query(ref(db, "/"), orderByChild("createdAt"));
+    const blogRef = ref(db, "/");
     onValue(blogRef, (snapshot) => {
       const data = snapshot.val();
       setBlogs(data);
@@ -32,7 +32,7 @@ function App() {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         setUser(user);
-        console.log(user);
+        // console.log(user);
       } else {
         setUser(null);
         console.log("user is logged out");

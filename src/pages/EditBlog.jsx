@@ -20,17 +20,16 @@ const EditBlog = ({ blogs, user }) => {
 
   const { id } = useParams();
   const navigate = useNavigate();
-  const currentDate = new Date();
 
   const handleChangeNew = (e) => {
     const input = e.target.name;
     const value = input == "blogImage" ? e.target.files[0] : e.target.value;
-    setFormInputNew((values) => ({ ...values, [input]: value })); //TODO: learn about this syntax
+    setFormInputNew((values) => ({ ...values, [input]: value }));
   };
   const handleChangeEdit = (e) => {
     const input = e.target.name;
     const value = input == "blogImage" ? e.target.files[0] : e.target.value;
-    setFormInputEdit((values) => ({ ...values, [input]: value })); //TODO: learn about this syntax
+    setFormInputEdit((values) => ({ ...values, [input]: value }));
   };
 
   const handlSubmitNew = async (e) => {
@@ -47,7 +46,7 @@ const EditBlog = ({ blogs, user }) => {
       authorId: user.uid,
       category: formInputNew.blogCategory,
       cover: cover,
-      createdAt: currentDate,
+      createdAt: new Date(),
       description: formInputNew.blogDesc,
       id: blogId,
       title: formInputNew.blogTitle,
@@ -79,7 +78,7 @@ const EditBlog = ({ blogs, user }) => {
     const editedBlog = {
       category: formInputEdit.blogCategory,
       cover: cover,
-      createdAt: currentDate,
+      createdAt: new Date(),
       description: formInputEdit.blogDesc,
       id: id,
       subCategory: null,
