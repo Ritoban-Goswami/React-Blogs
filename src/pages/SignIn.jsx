@@ -33,14 +33,14 @@ const SignIn = () => {
   return (
     <div>
       <div className="w-full max-w-2xl mx-auto">
-        <h1 className="text-neutral-100 text-center font-bold text-3xl my-4">
+        <h1 className="text-neutral-800 dark:text-neutral-200 text-center font-bold text-3xl my-4">
           Sign In To Your BlogsScape Account Now!
         </h1>
         <form onSubmit={handlSubmit} className="border rounded px-8 pt-6 pb-8">
           <div className="mb-8">
             <label
               htmlFor="blogTitle"
-              className="block text-neutral-200 text-lg font-semibold mb-3"
+              className="block text-neutral-800 dark:text-neutral-200 text-lg font-semibold mb-3"
             >
               Email Address
             </label>
@@ -55,7 +55,7 @@ const SignIn = () => {
           <div className="mb-10">
             <label
               htmlFor="blogDesc"
-              className="block text-neutral-200 text-lg font-semibold mb-3"
+              className="block text-neutral-800 dark:text-neutral-200 text-lg font-semibold mb-3"
             >
               Password
             </label>
@@ -66,7 +66,7 @@ const SignIn = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-          <div className="mb-8 text-neutral-300 text-sm font-bold">
+          <div className="mb-8 text-neutral-700 dark:text-neutral-300 text-sm font-bold">
             Don't Have An Account?{" "}
             <Link
               className="text-green-600 hover:text-green-700"
@@ -76,7 +76,7 @@ const SignIn = () => {
             </Link>
           </div>
           <div className="flex items-center justify-center">
-            <button className="w-1/4 text-neutral-200 bg-transparent font-semibold hover:text-green-600 py-2 px-4 border-green-600 border-2 rounded">
+            <button className="w-1/4 text-neutral-800 dark:text-neutral-200 bg-transparent font-semibold hover:text-green-600 py-2 px-4 border-green-600 border-2 rounded">
               {logginInUser ? <Loader /> : <>Go</>}
             </button>
           </div>

@@ -15,6 +15,15 @@ import { auth } from "../src/firebase-config";
 function App() {
   const [blogs, setBlogs] = useState({});
   const [user, setUser] = useState(null);
+  const [isDarkEnabled, setIsDarkEnabled] = useState(true);
+
+  function handleTheme() {
+    if (isDarkEnabled) {
+      setIsDarkEnabled(false);
+    } else if (!isDarkEnabled) {
+      setIsDarkEnabled(true);
+    }
+  }
 
   function readBlogData() {
     const blogRef = ref(db, "/");
@@ -41,20 +50,29 @@ function App() {
   }, []);
 
   return (
-    <div className="bg-neutral-950 min-h-screen">
-      <div className="container mx-auto p-4">
-        <Header user={user}></Header>
-        <Routes>
-          <Route path="/" element={<Home blogs={blogs} />} />
-          <Route path="/sign-in" element={<SignIn />} />
-          <Route path="/sign-up" element={<SignUp />} />
-          <Route path="blog/:id" element={<Blog blogs={blogs} user={user} />} />
-          <Route
-            path="edit-blog/:id"
-            element={<EditBlog blogs={blogs} user={user} />}
-          />
-          <Route path="*" element={<EmptyList />} />
-        </Routes>
+    <div className={isDarkEnabled ? "dark" : ""}>
+      <div className="bg-neutral-100 dark:bg-neutral-950 min-h-screen">
+        <div className="container mx-auto p-4">
+          <Header
+            user={user}
+            isDarkEnabled={isDarkEnabled}
+            handleTheme={handleTheme}
+          ></Header>
+          <Routes>
+            <Route path="/" element={<Home blogs={blogs} />} />
+            <Route path="/sign-in" element={<SignIn />} />
+            <Route path="/sign-up" element={<SignUp />} />
+            <Route
+              path="blog/:id"
+              element={<Blog blogs={blogs} user={user} />}
+            />
+            <Route
+              path="edit-blog/:id"
+              element={<EditBlog blogs={blogs} user={user} />}
+            />
+            <Route path="*" element={<EmptyList />} />
+          </Routes>
+        </div>
       </div>
     </div>
   );

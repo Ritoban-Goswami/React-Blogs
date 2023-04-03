@@ -10,14 +10,14 @@ const BlogForm = ({
 }) => {
   return (
     <div className="w-full max-w-2xl mx-auto">
-      <h1 className="text-neutral-100 text-center font-bold text-3xl my-4">
+      <h1 className="text-neutral-800 dark:text-neutral-200 text-center font-bold text-3xl my-4">
         {heading}
       </h1>
       <form onSubmit={handlSubmit} className="border rounded px-8 pt-6 pb-8">
         <div className="mb-8">
           <label
             htmlFor="blogTitle"
-            className="block text-neutral-200 text-lg font-semibold mb-3"
+            className="block text-neutral-800 dark:text-neutral-200 text-lg font-semibold mb-3"
           >
             Title
           </label>
@@ -33,7 +33,7 @@ const BlogForm = ({
         <div className="mb-8">
           <label
             htmlFor="blogDesc"
-            className="block text-neutral-200 text-lg font-semibold mb-3"
+            className="block text-neutral-800 dark:text-neutral-200 text-lg font-semibold mb-3"
           >
             Description
           </label>
@@ -49,7 +49,7 @@ const BlogForm = ({
         <div className="mb-8">
           <label
             htmlFor="blogImage"
-            className="block text-neutral-200 text-lg font-semibold mb-3"
+            className="block text-neutral-800 dark:text-neutral-200 text-lg font-semibold mb-3"
           >
             Cover Photo
           </label>
@@ -64,7 +64,7 @@ const BlogForm = ({
         <div className="mb-10">
           <label
             htmlFor="blogCategory"
-            className="block text-neutral-200 text-lg font-semibold mb-3"
+            className="block text-neutral-800 dark:text-neutral-200 text-lg font-semibold mb-3"
           >
             Category
           </label>
@@ -78,7 +78,7 @@ const BlogForm = ({
           />
         </div>
         <div className="flex items-center justify-center">
-          <button className="w-1/5 h-12 bg-transparent font-semibold text-neutral-200 hover:text-green-600 py-1 px-2 border-green-600 border-2 rounded">
+          <button className="w-1/5 h-12 bg-transparent font-semibold text-neutral-800 dark:text-neutral-200 hover:text-green-600 py-1 px-2 border-green-600 border-2 rounded">
             {submitting ? <Loader /> : <>Go</>}
           </button>
         </div>

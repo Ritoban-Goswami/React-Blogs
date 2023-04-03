@@ -45,10 +45,10 @@ const Blog = ({ blogs, user }) => {
       {blog ? (
         <div className="container px-4 mx-auto">
           <header className="text-center">
-            <p className="text-sm font-semibold text-neutral-400">
+            <p className="text-sm font-semibold text-neutral-600 dark:text-neutral-400">
               Published {blog.createdAt}
             </p>
-            <h1 className="font-bold text-neutral-100 text-3xl capitalize mt-8 mb-16">
+            <h1 className="font-bold text-neutral-800 dark:text-neutral-200 text-3xl capitalize mt-8 mb-16">
               {blog.title}
             </h1>
           </header>
@@ -57,17 +57,19 @@ const Blog = ({ blogs, user }) => {
             src={blog.cover}
             alt="cover"
           />
-          <p className="text-neutral-400 p-4 mt-6">{blog.description}</p>
+          <p className="text-neutral-600 dark:text-neutral-400 p-4 mt-6">
+            {blog.description}
+          </p>
           {user && user.uid === blog.authorId && (
             <div className="w-1/3 mx-auto flex justify-evenly items-center my-4">
               <Link
-                className="bg-transparent font-semibold text-neutral-200 hover:text-green-600 py-2 px-4 border-green-600 border-2 rounded"
+                className="bg-transparent font-semibold text-neutral-800 dark:text-neutral-200 hover:text-green-600 py-2 px-4 border-green-600 border-2 rounded"
                 to={`/edit-blog/${id}`}
               >
                 Edit Blog
               </Link>
               <Link
-                className="bg-transparent font-semibold text-neutral-200 hover:text-red-600 py-2 px-4 border-red-500 border-2 rounded"
+                className="bg-transparent font-semibold text-neutral-800 dark:text-neutral-200 hover:text-red-600 py-2 px-4 border-red-500 border-2 rounded"
                 onClick={handleDelete}
                 to={"/"}
               >
