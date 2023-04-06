@@ -23,17 +23,47 @@ const EditBlog = ({ blogs, user }) => {
 
   const handleChangeNew = (e) => {
     const input = e.target.name;
-    const value = input == "blogImage" ? e.target.files[0] : e.target.value;
-    setFormInputNew((values) => ({ ...values, [input]: value }));
+
+    if (input === "blogImage") {
+      const value = e.target.files[0];
+      const reader = new FileReader();
+      reader.readAsDataURL(value);
+      reader.onload = () => {
+        setFormInputNew((values) => ({
+          ...values,
+          [input]: value,
+          blogCurrentCover: reader.result,
+        }));
+      };
+    } else {
+      const value = e.target.value;
+      setFormInputNew((values) => ({ ...values, [input]: value }));
+    }
+    // console.log(formInputNew);
   };
   const handleChangeEdit = (e) => {
     const input = e.target.name;
-    const value = input == "blogImage" ? e.target.files[0] : e.target.value;
-    setFormInputEdit((values) => ({ ...values, [input]: value }));
+
+    if (input === "blogImage") {
+      const value = e.target.files[0];
+      const reader = new FileReader();
+      reader.readAsDataURL(value);
+      reader.onload = () => {
+        setFormInputEdit((values) => ({
+          ...values,
+          [input]: value,
+          blogCurrentCover: reader.result,
+        }));
+      };
+    } else {
+      const value = e.target.value;
+      setFormInputEdit((values) => ({ ...values, [input]: value }));
+    }
   };
 
   const handlSubmitNew = async (e) => {
     const blogId = uuid();
+    const newBlogDate = new Date();
     e.preventDefault();
     setSubmitting(true);
     const cover = formInputNew.blogImage
@@ -44,14 +74,13 @@ const EditBlog = ({ blogs, user }) => {
       authorAvatar: user.photoURL ? user.photoURL : "/assets/images/author.jpg",
       authorName: user.displayName,
       authorId: user.uid,
-      category: formInputNew.blogCategory,
+      category: formInputNew.blogCategory || "",
       cover: cover,
-      createdAt: new Date(),
-      description: formInputNew.blogDesc,
+      createdAt: newBlogDate.toISOString(),
+      description: formInputNew.blogDesc || "",
       id: blogId,
-      title: formInputNew.blogTitle,
+      title: formInputNew.blogTitle || "",
     };
-
     try {
       await set(ref_database(db, "/" + blogId), newBlog);
       navigate(`/blog/${blogId}`);
@@ -70,21 +99,21 @@ const EditBlog = ({ blogs, user }) => {
 
   const handlSubmitEdit = async (e) => {
     e.preventDefault();
+    const editedBlogDate = new Date();
     setSubmitting(true);
     const cover = formInputEdit.blogImage
       ? await uploadBlogImage(formInputEdit.blogImage)
-      : "https://picsum.photos/600/450";
+      : formInputEdit.blogCurrentCover || "https://picsum.photos/600/450";
 
     const editedBlog = {
       category: formInputEdit.blogCategory,
       cover: cover,
-      createdAt: new Date(),
+      createdAt: editedBlogDate.toISOString(),
       description: formInputEdit.blogDesc,
       id: id,
       subCategory: null,
       title: formInputEdit.blogTitle,
     };
-
     try {
       await update(ref_database(db, "/" + id), editedBlog);
       navigate(`/blog/${id}`);
@@ -106,6 +135,7 @@ const EditBlog = ({ blogs, user }) => {
         blogTitle: blogs[id].title,
         blogDesc: blogs[id].description,
         blogCategory: blogs[id].category,
+        blogCurrentCover: blogs[id].cover,
       });
     }
   }, [blogsId, id]);

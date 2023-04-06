@@ -53,9 +53,16 @@ const BlogForm = ({
           >
             Cover Photo
           </label>
+          {formInput.blogCurrentCover && (
+            <img
+              src={formInput.blogCurrentCover}
+              className="w-full h-72 opacity-75 object-cover rounded-2xl mb-2"
+              alt="Blog Cover Photo"
+            />
+          )}
           <input
             type="file"
-            className="appearance-none w-full py-2"
+            className="appearance-none w-full py-2 text-neutral-800 dark:text-neutral-400"
             onChange={handleChange}
             name="blogImage"
             id="blogImage"
