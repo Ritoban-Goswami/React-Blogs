@@ -23,7 +23,7 @@ const BlogItem = ({
         alt="cover"
       />
       <Chip label={category}></Chip>
-      <h3 className="text-neutral-800 dark:text-neutral-200 mb-4 mt-2 font-bold text-[1.4rem]">
+      <h3 className="text-neutral-800 dark:text-neutral-200 mb-4 mt-2 font-roboto font-bold text-[1.4rem]">
         {title}
       </h3>
       <p className="truncate text-sm pr-3 text-neutral-600 dark:text-neutral-400">

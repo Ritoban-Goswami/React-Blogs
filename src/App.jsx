@@ -52,7 +52,7 @@ function App() {
   return (
     <div className={isDarkEnabled ? "dark" : ""}>
       <div className="bg-neutral-100 dark:bg-neutral-950 min-h-screen">
-        <div className="container mx-auto p-4">
+        <div className="container mx-auto p-4 font-inter">
           <Header
             user={user}
             isDarkEnabled={isDarkEnabled}
