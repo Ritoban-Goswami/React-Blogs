@@ -62,7 +62,10 @@ const BlogForm = ({
           )}
           <input
             type="file"
-            className="appearance-none w-full py-2 text-neutral-800 dark:text-neutral-400"
+            className="w-full py-2 text-neutral-800 dark:text-neutral-400 block text-sm cursor-pointer focus:outline-none file:mr-4 file:py-2 file:px-4
+            file:rounded-full file:border-0
+            file:text-sm file:font-semibold file:text-neutral-700
+            hover:file:bg-neutral-400"
             onChange={handleChange}
             name="blogImage"
             id="blogImage"

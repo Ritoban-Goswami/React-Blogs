@@ -48,12 +48,12 @@ const Blog = ({ blogs, user }) => {
             <p className="text-sm font-semibold text-neutral-600 dark:text-neutral-400">
               Published {blog.createdAt}
             </p>
-            <h1 className="font-bold text-neutral-800 dark:text-neutral-200 text-3xl capitalize mt-8 mb-16">
+            <h1 className="font-bold text-neutral-800 dark:text-neutral-200 text-3xl capitalize mt-8 mb-16 font-roboto">
               {blog.title}
             </h1>
           </header>
           <img
-            className="w-4/6 mx-auto rounded-2xl"
+            className="w-4/6 mx-auto rounded-2xl h-[35rem]"
             src={blog.cover}
             alt="cover"
           />
